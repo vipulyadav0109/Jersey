@@ -1,0 +1,47 @@
+
+
+create table STUDENT(
+STUDENT_NO int PRIMARY KEY,
+STUDENT_NAME TEXT (10),
+STUDENT_DOB DATE,
+STUDENT_DOJ DATE);
+
+create table PROJECT(
+PRJ_NO int PRIMARY KEY,
+PRJ_NAME TEXT (15),
+PRJ_DUR int(2),			
+PRJ_PLATFORM TEXT (10));
+
+create table STUDENT_PROJECT(
+STUDENT_NO int,
+PRJ_NO int,    
+DESIGNATION TEXT(10),
+FOREIGN KEY(STUDENT_NO) references STUDENT(STUDENT_NO),
+FOREIGN KEY(PRJ_NO) references PROJECT(PRJ_NO));
+
+INSERT INTO student values(101,'vipul',STR_TO_DATE('02/09/1999', '%m/%d/%Y'),STR_TO_DATE('01/05/2018', '%m/%d/%Y'));
+INSERT INTO student values(102,'suraj',STR_TO_DATE('01/22/1997', '%m/%d/%Y'),STR_TO_DATE('5/13/2016', '%m/%d/%Y'));
+INSERT INTO student values(103,'komal',STR_TO_DATE('03/13/1998', '%m/%d/%Y'),STR_TO_DATE('9/20/2021', '%m/%d/%Y'));
+INSERT INTO student values(104,'nikita',STR_TO_DATE('08/19/1998', '%m/%d/%Y'),STR_TO_DATE('10/25/2018', '%m/%d/%Y'));
+INSERT INTO student values(105,'varsha',STR_TO_DATE('06/29/1997', '%m/%d/%Y'),STR_TO_DATE('11/15/2020', '%m/%d/%Y'));
+
+INSERT INTO PROJECT values(1,'android_app',6, 'java');
+INSERT INTO PROJECT values(2,'scubatica',10, 'java');
+
+INSERT INTO STUDENT_PROJECT values(102,'1','developer');
+INSERT INTO STUDENT_PROJECT values(105,'1','tester');
+INSERT INTO STUDENT_PROJECT values(101,'2','developer');
+INSERT INTO STUDENT_PROJECT values(103,'2','tester');
+INSERT INTO STUDENT_PROJECT values(104,'2','hr');
+
+select * from student;
+select * from PROJECT;
+select * from STUDENT_PROJECT;
+commit;
+
+select * from student ;
+
+select * from student s inner join STUDENT_PROJECT s_p 
+on s.STUDENT_NO=s_p.STUDENT_NO 
+inner join PROJECT p
+on s_p.PRJ_NO =p.PRJ_NO;
